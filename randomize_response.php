@@ -2,41 +2,57 @@
 // randomize_response.php
 
 // Array of possible responses related to Internet Technology
-$responses = [
+$responses = array(
 
-"It will probably succeed, but don't get too excited, you inept imbecile. Knowing your track record, you'll likely find a way to mess it up just like Tim always does."
-
-"Sure, go ahead and keep going if you enjoy stumbling through challenges, you bumbling buffoon. It's like watching Tim try to juggle flaming swords with his eyes closed."
-
-"Well, who the hell knows? Your decision-making skills are as reliable as Tim's fashion sense, which is to say, non-existent."
-
-"Instead of wasting your time on this hopeless endeavor, maybe you should try something that actually requires a hint of intelligence, unlike Tim's latest brilliant idea of inventing a self-peeling banana."
-
-"Proceed with caution, because your ability to screw things up is on par with Tim's talent for getting lost in his own backyard."
-
-"Not only is it a terrible idea, but even Tim, the master of terrible ideas, would shake his head in disbelief at your lack of common sense."
-
-"The outcome looks promising, but considering your long list of failures, I wouldn't be surprised if you end up following in Tim's footsteps of creating chaos wherever you go."
-
-"I strongly advise against it, unless you want to join Tim in his never-ending quest to become the world's most notorious failure."
-
-"Well, you might have a high chance of success if you miraculously manage not to screw it up like you usually do, unlike poor Tim, whose name has become synonymous with disaster."
-
-"It's worth a try, if you enjoy wasting your time and being mentioned in the same breath as Tim, the epitome of epic fails."
-
-];
+"Oh, sure, let's fix another one of your 'emergencies' while I magically pull solutions out of thin air.",
+"Of course, your lack of planning is now my top priority. It's not like I have other things to do.",
+"Oh, brilliant idea! Let's add more complexity to an already convoluted system. What could possibly go wrong?",
+"You want it done by when? Ah, the 'ASAP' deadline, my favorite, right after 'right now' and 'yesterday.'",
+"Sure, I'll just wave my IT wand and fix everything. Because that's totally how it works.",
+"Oh, you broke it again? Color me surprised. I never could have predicted that.",
+"You want me to troubleshoot your issue? Let me grab my crystal ball and summon the IT spirits for you.",
+"Your request is so unique and groundbreaking that it will surely require an unparalleled amount of eye-rolling on my part.",
+"Congratulations! You've discovered a brand-new way to break the system. You must be so proud.",
+"Oh, you need IT support? Let me guess, the 'I' stands for 'Inconvenience' in your world.",
+"Sure, I'll happily prioritize your ticket right after I finish juggling flaming chainsaws.",
+"Your technical expertise is truly astounding. I can't believe you didn't think of Googling the issue yourself.",
+"Ah, yes, the classic 'I didn't do anything, it just stopped working' excuse. It's music to my ears.",
+"Of course, I love being your personal IT magician. Just don't forget to clap your hands and say 'IT, fix it!'",
+"Oh, don't worry, your vague and incomplete description of the problem is more than enough for me to work my magic.",
+"You want a solution that's both fast and perfect? Sorry, our IT department doesn't deal in miracles.",
+"Yes, I have all the time in the world to cater to your every IT whim. My other responsibilities are just a myth.",
+"Just because I'm an IT manager doesn't mean I have a magic wand to resolve your self-inflicted technical disasters.",
+"You broke the same thing for the tenth time? It's like Groundhog Day, but with less humor and more frustration.",
+"Sure, I'll prioritize your issue right after I've finished perfecting my IT telepathy skills. It's a work in progress."
+);
 
 if (isset($_GET['question'])) {
     // Retrieve the question from the AJAX request
     $question = $_GET['question'];
 
-    // Generate a random response
-    $randomResponse = $responses[array_rand($responses)];
+    // Generate a random index within the range of the responses array
+    $randomIndex = array_rand($responses);
+
+    // Get the response associated with the random index
+    $randomResponse = $responses[$randomIndex];
 
     // Simulate a delay to make it appear as if the response is being processed
     sleep(1);
 
-    // Return the randomized response
-    echo $randomResponse;
+    // Create an associative array to hold the question and response
+    $data = array(
+        'question' => $question,
+        'response' => $randomResponse
+    );
+
+    // Convert the array to JSON format
+    $jsonData = json_encode($data);
+
+    // Set the appropriate response headers
+    header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
+
+    // Return the JSON-encoded data
+    echo $jsonData;
 }
 ?>
